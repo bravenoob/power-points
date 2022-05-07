@@ -8,11 +8,9 @@ let basePath =
 export const getDesc = (nft) => {
   let desc;
   desc = `
-  🔷ID: ${config.STARTING_INDEX == 1 ? nft.id + 1 : nft.id}
+  🔷ID: ${nft.token_id}
   
-  🔷Rarity score: ${nft.rarity_score.toFixed(2)}
-  
-  🔷Rarity rank: ${nft.rarity_rank + 1}
+  🔷Rarity Power: ${nft.rarity_power}
   
   ${
     nft.current_price !== "-"

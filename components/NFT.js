@@ -9,15 +9,15 @@ export const NFT = (nft) => {
         className="text-left w-24
         cursor-pointer rounded-md shadow-xs
         mr-3 mb-3 sm:mr-4 hover:underline text-center"
-        href={`/${config.STARTING_INDEX == 1 ? nft.id + 1 : nft.id}`}
+        href={`/${nft.token_id}`}
       >
         <img
           src={formatIpfsUrl(nft.image)}
-          className="rounded-md h-auto bg-black"
+          className="rounded-md h-auto bg-white"
         />
         <div className="rounded-b-md py-2 px-2">
           <h3 className="text-xs text-gray-600">
-            #{config.STARTING_INDEX == 1 ? nft.id + 1 : nft.id}
+            #{nft.token_id} | RP: {nft.rarity_power}
           </h3>
         </div>
       </a>

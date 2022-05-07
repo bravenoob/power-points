@@ -5,7 +5,7 @@ import { json2query } from "../util";
 
 export const Tools = (props) => {
   const router = useRouter();
-  const { sort_by = "rarity_score", order = "desc" } = router.query;
+  const { sort_by = "rarity_power", order = "desc" } = router.query;
   const handleChange = (option) => {
     props.setShowMenu(false);
     if (option.toLowerCase().includes("rarity")) {
@@ -13,7 +13,7 @@ export const Tools = (props) => {
         router.push(
           `?${json2query({
             ...router.query,
-            sort_by: "rarity_score",
+            sort_by: "rarity_power",
             order: "desc",
             page_id: 0,
           })}`
@@ -23,7 +23,7 @@ export const Tools = (props) => {
         router.push(
           `?${json2query({
             ...router.query,
-            sort_by: "rarity_score",
+            sort_by: "rarity_power",
             order: "asc",
             page_id: 0,
           })}`
@@ -36,7 +36,7 @@ export const Tools = (props) => {
         router.push(
           `?${json2query({
             ...router.query,
-            sort_by: "id",
+            sort_by: "token_id",
             order: "desc",
             page_id: 0,
           })}`
@@ -46,7 +46,7 @@ export const Tools = (props) => {
         router.push(
           `?${json2query({
             ...router.query,
-            sort_by: "id",
+            sort_by: "token_id",
             order: "asc",
             page_id: 0,
           })}`
@@ -60,7 +60,7 @@ export const Tools = (props) => {
       <h3 className="text-xs text-gray-700 uppercase mb-2 font-bold">
         Sort By
       </h3>
-      {!(sort_by == "rarity_score" && order == "desc") && (
+      {!(sort_by == "rarity_power" && order == "desc") && (
         <a
           className="hover:bg-gray-300 hover:text-gray-900  cursor-pointer text-xs text-gray-700 py-2 px-2 rounded-md w-full flex items-center"
           onClick={() => {
@@ -70,10 +70,10 @@ export const Tools = (props) => {
           <span c lassName="text-xs">
             <ImSortNumbericDesc />
           </span>
-          <span className="text-xs">&nbsp;&nbsp;Rarity</span>
+          <span className="text-xs">&nbsp;&nbsp;Rarity Power</span>
         </a>
       )}
-      {!(sort_by == "rarity_score" && order == "asc") && (
+      {!(sort_by == "rarity_power" && order == "asc") && (
         <a
           className="hover:bg-gray-300 hover:text-gray-900 cursor-pointer text-gray-700 py-2 px-2 rounded-md w-full flex items-center"
           onClick={() => {
@@ -83,10 +83,10 @@ export const Tools = (props) => {
           <span className="text-xs">
             <ImSortNumericAsc />
           </span>
-          <span className="text-xs">&nbsp;&nbsp;Rarity</span>
+          <span className="text-xs">&nbsp;&nbsp;Rarity Power</span>
         </a>
       )}
-      {!(sort_by == "id" && order == "desc") && (
+      {!(sort_by == "token_id" && order == "desc") && (
         <a
           className="hover:bg-gray-300 hover:text-gray-900 cursor-pointer text-gray-700 py-2 px-2 rounded-md w-full flex items-center"
           onClick={() => {
@@ -99,7 +99,7 @@ export const Tools = (props) => {
           <span className="text-xs">&nbsp;&nbsp;Token ID</span>
         </a>
       )}
-      {!(sort_by == "id" && order == "asc") && (
+      {!(sort_by == "token_id" && order == "asc") && (
         <a
           className="hover:bg-gray-300 hover:text-gray-900 cursor-pointer text-gray-700 py-2 px-2 rounded-md w-full flex items-center"
           onClick={() => {

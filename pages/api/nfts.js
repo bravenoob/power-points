@@ -5,10 +5,9 @@ import { getNFTs } from "../../util/nfts";
 export default function nftsAPI(req, res) {
   let {
     page_id = 0,
-    sort_by = "rarity_score",
+    sort_by = "rarity_power",
     order = "desc",
     traits = "",
-    attr_count = "",
     query,
   } = req.query;
   let { nfts, pages } = getNFTs(
@@ -16,7 +15,6 @@ export default function nftsAPI(req, res) {
     sort_by,
     order,
     traits.split(",").filter((val) => val),
-    attr_count,
     query
   );
   res.status(200).json({ nfts, pages });

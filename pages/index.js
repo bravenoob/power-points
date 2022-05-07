@@ -15,11 +15,11 @@ function Home({ title, img, description, nfts, pages, filters }) {
   const router = useRouter();
   const ref = createRef(null);
   const [showMenu, setShowMenu] = useState(false);
-  const { all_traits, attr_count } = filters;
+  const { all_traits } = filters;
 
   return (
     <div
-      className="flex flex-col items-center justify-center 
+      className="flex flex-col items-center justify-center
     min-h-screen bg-gradient-to-r from-rose-50 to-rose-100 h-full"
       ref={ref}
     >
@@ -52,7 +52,6 @@ function Home({ title, img, description, nfts, pages, filters }) {
       <main className="relative flex justify-center w-full flex-1 h-screen">
         <SideBar
           all_traits={all_traits}
-          attr_count={attr_count}
           showMenu={showMenu}
           setShowMenu={setShowMenu}
         />

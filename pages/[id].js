@@ -1,7 +1,7 @@
 import { formatIpfsUrl, formatPrice, getDesc, ipfs2http } from "../util";
 import { FiArrowLeft } from "react-icons/fi";
 import { NextSeo } from "next-seo";
-import { getNFT, getNFTInfo } from "../util/requests";
+import { getNFT } from "../util/requests";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 import { config } from "../config";
@@ -15,7 +15,7 @@ const Trait = (attribute) => {
           {attribute?.trait_type.toUpperCase()}{" "}
         </span>
         <span className="text-red-500 font-bold">
-          +{attribute.rarity_score?.toFixed(2)}
+          +{attribute.rarity_power?.toFixed(2)}
         </span>
       </div>
       <div className="flex justify-between w-full text-xs text-gray-700">
@@ -34,7 +34,7 @@ function NFT({ nft, title }) {
   return (
     <>
       <div
-        className="flex flex-col items-center justify-center 
+        className="flex flex-col items-center justify-center
       min-h-screen bg-gray-100"
       >
         <NextSeo
@@ -62,22 +62,24 @@ function NFT({ nft, title }) {
         </div>
 
         <main
-          className="flex flex-col items-center justify-center 
+          className="flex flex-col items-center justify-center
         w-full flex-1 p-2 rounded-lg text-center mb-8 max-w-xl"
         >
           <div className="justify-center p-4 shadow-xl rounded-md bg-white">
-            <h3 className="text-3xl font-semibold mb-4">{nft?.name}</h3>
+            <h3 className="text-3xl font-semibold mb-4">
+              {nft?.name} (#{nft?.token_id})
+            </h3>
             <div className="relative rounded-md bg-black w-full">
               <img className="rounded-md" src={img_url} />
               <span
                 className="absolute top-5 right-5
               text-white px-2 py-2 font-medium text-xs rounded-md bg-yellow-100 text-yellow-600"
               >
-                #{nft.rarity_rank + 1}
+                Top Tank
               </span>
             </div>
             <div className="py-4 px-2 w-full rounded-md text-lg mt-4 bg-red-100 text-red-500">
-              ♦️ {nft.rarity_score.toFixed(2)}
+              Rarity Power️ {nft.rarity_power}
             </div>
             {nft.current_price !== "-" && (
               <div className="py-4 px-2 w-full rounded-md text-lg mt-4 bg-green-100 text-green-500">
@@ -85,15 +87,14 @@ function NFT({ nft, title }) {
               </div>
             )}
 
-            {nft?.external_url && (
-              <a
-                className="py-4 px-2 flex text-center w-full items-center justify-center mt-4 bg-blue-100 text-blue-500"
-                href={nft?.external_url}
-                target="_blank"
-              >
-                🛒 Visit gallery
-              </a>
-            )}
+            <a
+              className="py-4 px-2 flex text-center w-full items-center justify-center mt-4 bg-blue-100 text-blue-500"
+              href={`https://marketplace.tankwars.zone/products/${nft?.link}`}
+              target="_blank"
+            >
+              🛒 Visit marketplace
+            </a>
+
             <div className="py-4 flex flex-col items-start justify-start">
               {/* <h2 className="px-2 text-xl mb-2 font-bold text-gray-800">Traits</h2> */}
               {nft?.attributes?.map((attribute, idx) => (
@@ -113,7 +114,7 @@ function NFT({ nft, title }) {
 }
 
 NFT.getInitialProps = async ({ query }) => {
-  let nft = await getNFT(config.STARTING_INDEX == 1 ? query.id - 1 : query.id);
+  let nft = await getNFT(query.id);
   // let opensea_info = await getNFTInfo(query.id);
   // nft["opensea_link"] = opensea_info["assets"][0]["permalink"];
   nft["current_price"] = "-";
