@@ -1,7 +1,7 @@
 export const config = {
-  env: "local",
+  env: "prod",
   LOCAL_API_URL: "localhost:3000",
-  API_URL: "odp-rarity.vercel.app",
+  API_URL: "tankwars.vercel.app",
   COLLECTION_NAME: "Tankwars Community Statistics",
   COLLECTION_TITLE: "Tankwars Community Statistics",
   COLLECTION_DESCRIPTION: "Play 2 Earn",
