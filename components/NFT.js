@@ -1,5 +1,5 @@
 import React from "react";
-import { formatIpfsUrl, ipfs2http } from "../util";
+import { formatIpfsUrl, formatPrice, ipfs2http } from "../util";
 import { config } from "../config";
 
 export const NFT = (nft) => {
@@ -17,7 +17,12 @@ export const NFT = (nft) => {
         />
         <div className="rounded-b-md py-2 px-2">
           <h3 className="text-xs text-gray-600">
-            #{nft.token_id} | RP: {nft.rarity_power}
+            #{nft.token_id} | RP: {nft.rarity_power} {nft.buy}
+            {nft?.buy && (
+              <div className="py-4 px-2 w-full rounded-md text-lg mt-4 bg-green-100 text-green-500">
+                <span>{`Ξ ${formatPrice(nft?.price)}`}</span>
+              </div>
+            )}
           </h3>
         </div>
       </a>

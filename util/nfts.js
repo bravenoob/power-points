@@ -1,5 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { getPriceInfo } from "./requests";
+
 let nfts = require("../data/collection.json");
+let market = require("../data/market.json");
 
 const get_all_traits = (nft_arr) => {
   let all_traits = {};
@@ -49,12 +52,22 @@ const filter_nft_attributes = (nft) => {
   );
 };
 
+const add_market_link = () => {
+  nfts.forEach(function (element) {
+    let mark = market.filter((mark) => mark.game_id === element.id);
+    element["market_id"] = { ...mark[0] }.marketplace_id;
+  });
+};
+
+add_market_link();
+
 export const getNFT = (id) => {
   // Retrieve nft for id
   let result = nfts.filter((nft) => nft.token_id === id);
   if (result) {
     //nft.link = (nft.id.slice(0, 8) + '-' + nft.id.slice(8,12) + "-" + nft.id.slice(12,16) + "-" + nft.id.slice(16,20) + "-" + nft.id.slice(20,28));
-    return { ...result[0] };
+    let nft = result[0];
+    return { ...nft };
   }
 };
 
@@ -106,6 +119,15 @@ export const getNFTs = (page_id, sort_by, order, traits, query) => {
     .filter((nft) => filterNFT(nft, traits));
   let nftdata = nftcollection.slice(page_id * 54, page_id * 54 + 54);
   let pages = Math.ceil(nftcollection.length / 54);
+
+  nftdata.forEach(function (element) {
+    let result = getPriceInfo(element.market_id);
+    if (result.order) {
+      console.log("true");
+      element["buy"] = true;
+      element["price"] = result.order.price;
+    }
+  });
 
   return { nfts: nftdata, pages };
 };

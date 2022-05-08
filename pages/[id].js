@@ -89,7 +89,7 @@ function NFT({ nft, title }) {
 
             <a
               className="py-4 px-2 flex text-center w-full items-center justify-center mt-4 bg-blue-100 text-blue-500"
-              href={`https://marketplace.tankwars.zone/products/${nft?.link}`}
+              href={`https://marketplace.tankwars.zone/products/${nft?.market_id}`}
               target="_blank"
             >
               🛒 Visit marketplace

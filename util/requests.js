@@ -9,7 +9,6 @@ let basePath =
 export const getNFT = async (id) => {
   const res = await fetch(`${basePath}/api/nft?id=${id}`);
   const data = await res.json();
-  console.log(data);
   return data;
 };
 
@@ -25,9 +24,9 @@ export const getFilters = async (query) => {
   return data;
 };
 
-export const getNFTInfo = async (id) => {
+export const getPriceInfo = async (id) => {
   const res = await fetch(
-    `https://api.opensea.io/api/v1/assets?collection=${config.COLLECTION_NAME.toLowerCase()}&token_ids=${id}&format=json`
+    `https://marketplace-api.tankwars.zone/api/v1/items/${id}`
   );
   const data = await res.json();
   return data;
